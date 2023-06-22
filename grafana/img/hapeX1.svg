@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="24px" height="24px" class="css-eyx4do" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 1760 1780"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil2 {fill:none}
+    .fil0 {fill:#FEFEFE}
+    .fil1 {fill:#108064}
+   ]]>
+  </style>
+ </defs>
+ <g id="Warstwa_x0020_1">
+  <circle class="fil0" cx="880" cy="880" r="880"/>
+  <path class="fil1" d="M810 1610l0 -710 150 0 0 380c210,-20 320,-140 320,-360 0,-220 -290,-500 -400,-610 -110,110 -400,390 -400,610 0,100 20,180 60,240 20,10 20,30 20,40 0,40 -30,70 -70,70 -30,0 -50,-20 -70,-40 -60,-80 -90,-180 -90,-310 0,-310 410,-680 500,-750l0 0c30,-20 70,-20 100,0l10 0c80,70 490,440 490,750 0,290 -170,470 -470,490l0 200 -150 0z"/>
+  <circle class="fil2" cx="880" cy="900" r="880"/>
+ </g>
+</svg>

@@ -1,0 +1,113 @@
+version: "3.8"
+services:
+  influxdb-1:
+    image: influxdb:2.7.1
+    container_name: SUES_influxdb1
+    environment:
+      - INFLUXDB_HTTP_BIND_ADDRESS=:8086
+      - INFLUXDB_DB=HAPE
+    ports:
+      - 8086:8086
+    volumes:
+      - ./influxdb-1:/var/lib/influxdb2
+    env_file:
+      - .env
+    networks: 
+      - SUES_net
+
+  influxdb-2:
+    image: influxdb:2.7.1
+    container_name: SUES_influxdb2
+    environment:
+      - INFLUXDB_HTTP_BIND_ADDRESS=:8086
+      - INFLUXDB_DB=HAPE
+    ports:
+      - 8087:8086
+    volumes:
+      - ./influxdb-2:/var/lib/influxdb2
+    env_file:
+      - .env
+    networks: 
+      - SUES_net
+  telegraf:
+    build: ./telegraf
+    image: localbuild/telegraf:1.26.3
+    depends_on:
+      - influxdb-1
+      - influxdb-2
+    container_name: SUES_telegraf
+    links:
+      - influxdb-1
+      - influxdb-2
+    #restart: unless-stopped
+    #environment:
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+      #- /var/run/docker.sock:/var/run/docker.sock"
+    env_file:
+      - .env
+    networks: 
+     - SUES_net
+ 
+  mosquitto:
+    build: ./mosquitto
+    image: localbuild/mosquitto:latest
+    container_name: SUES_mosquitto
+    restart: unless-stopped
+    ports: 
+      - 8883:8883  #1883
+      - 9001:9001
+    volumes: 
+      - mosquittoLog:/mosquitto/log
+      - mosquittoData:/mosquitto/data
+    networks:
+      - SUES_net
+
+  nodered: 
+    build: ./nodered
+    image: localbuild/nodered:latest
+    container_name: SUES_nodered
+    restart: unless-stopped
+    ports: 
+      - 1880:1880
+    volumes:
+      - noderedData:/data
+    networks:
+      - SUES_net
+
+  grafana:
+    build: ./grafana
+    image: localbuild/grafana/grafana:9.5.1
+    container_name: SUES_grafana
+    restart: unless-stopped #always
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SMTP_ENABLED=true
+      - GF_SMTP_SKIP_VERITY=true
+      - GF_SMTP_HOST=smtp.gmail.com:465  
+      - GF_SMTP_USER=suesinnovation@gmail.com
+      - GF_SMTP_PASSWORD=sues123123
+      - GF_SMTP_FROM_ADDRESS=suesinnovation@gmail.com
+      - GF_SERVER_DOMAIN=grafana.server.name
+      - GF_SERVER_PORT=80
+    ports:
+      - 3000:3000
+    volumes: 
+      - grafanaData:/var/lib/grafana
+    networks:
+      - SUES_net
+
+#Create internal link network for Containers
+networks:
+  SUES_net:
+    driver: bridge
+
+#Create Volumes for persistent Storage
+volumes:
+  noderedData:
+  grafanaData:
+  influxData:
+  mosquittoLog:
+  mosquittoData:

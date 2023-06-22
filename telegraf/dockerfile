@@ -1,0 +1,16 @@
+FROM telegraf:1.26.3
+
+# ENV TELE_CONF_PATH="/etc/telegraf"
+#ENV GF_PATHS_PLUGINS="/var/lib/docker/overlay2/e5011136a41996896eb77e31995609e06cd1c7248b68ad6245b79bf84b09ac93/merged/var/lib/grafana/plugins"
+
+# Copy artifacts
+ #COPY --chown=grafana:root dist /app
+ #COPY entrypoint.sh / 
+
+# Provisioning
+#COPY --chown=grafana:root provisioning $GF_PATHS_PROVISIONING
+###### Customization ########################################
+# USER root
+
+# Replace Faviconpu
+# COPY /home/debian/telegraf/telegraf.conf TELE_CONF_PATH
