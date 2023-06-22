@@ -33,11 +33,9 @@ services:
     image: localbuild/telegraf:1.26.3
     depends_on:
       - influxdb-1
-      - influxdb-2
     container_name: SUES_telegraf
     links:
       - influxdb-1
-      - influxdb-2
     #restart: unless-stopped
     #environment:
     volumes:
