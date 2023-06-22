@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.0"
 services:
   influxdb-1:
     image: influxdb:2.7.1
