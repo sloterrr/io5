@@ -20,11 +20,11 @@ services:
     image: influxdb:2.7.1
     container_name: SUES_influxdb2
     environment:
-      - INFLUXDB_HTTP_BIND_ADDRESS=:8086
+      - INFLUXDB_HTTP_BIND_ADDRESS=:8087
       - INFLUXDB_DB=HAPE
-      - INFLUX_TOKEN=$INFLUX_TOKEN2
+      - INFLUX_TOKEN=$INFLUX_TOKEN1
     ports:
-      - 8087:8086
+      - 8087:8087
     command: influxd run -config /etc/influxdb/influxdb.conf
     volumes:
       - ./influxdb-2:/var/lib/influxdb2
