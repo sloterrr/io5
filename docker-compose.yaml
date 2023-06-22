@@ -6,6 +6,7 @@ services:
     environment:
       - INFLUXDB_HTTP_BIND_ADDRESS=:8086
       - INFLUXDB_DB=HAPE
+      - INFLUX_TOKEN=$INFLUX_TOKEN1
     ports:
       - 8086:8086
     volumes:
@@ -20,6 +21,7 @@ services:
     environment:
       - INFLUXDB_HTTP_BIND_ADDRESS=:8086
       - INFLUXDB_DB=HAPE
+      - INFLUX_TOKEN=$INFLUX_TOKEN2
     ports:
       - 8087:8086
     volumes:
