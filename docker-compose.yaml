@@ -101,7 +101,6 @@ services:
 #Create internal link network for Containers
 networks:
   SUES_net:
-    driver: bridge
 
 #Create Volumes for persistent Storage
 volumes:
