@@ -9,7 +9,6 @@ services:
       - INFLUX_TOKEN=$INFLUX_TOKEN1
     ports:
       - 8086:8086
-    command: influxd run -config /etc/influxdb/influxdb.conf
     volumes:
       - ./influxdb-1:/var/lib/influxdb2
     env_file:
@@ -25,7 +24,6 @@ services:
       - INFLUX_TOKEN=$INFLUX_TOKEN1
     ports:
       - 8087:8087
-    command: influxd run -config /etc/influxdb/influxdb.conf
     volumes:
       - ./influxdb-2:/var/lib/influxdb2
     env_file:
@@ -105,7 +103,6 @@ services:
 #Create internal link network for Containers
 networks:
   SUES_net:
-    driver: bridge
 
 #Create Volumes for persistent Storage
 volumes:
