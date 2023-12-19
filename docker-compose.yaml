@@ -65,7 +65,7 @@ services:
 
   grafana:
     build: ./grafana
-    image: localbuild/grafana/grafana:10.2.3
+    image: localbuild/grafana/grafana:9.5.1
     container_name: SUES_grafana
     restart: unless-stopped #always
     environment:
