@@ -1,49 +1,36 @@
 version: "3.0"
 services:
   influxdb-1:
-    image: influxdb:2.7.1
+   # build: ./influxdb-1
+    image: influxdb:2.7.4
     container_name: SUES_influxdb1
+    restart: unless-stopped
     environment:
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=$MAIN_TOKEN1
+      - INFLUX_TOKEN=$MAIN_TOKEN1
+      - DOCKER_INFLUXDB_INIT_PORT=8086
+      - DOCKER_INFLUXDB_INIT_HOST=influxdb
       - INFLUXDB_HTTP_BIND_ADDRESS=:8086
-      - INFLUXDB_DB=HAPE
-      - INFLUX_TOKEN=$INFLUX_TOKEN1
+      - INFLUXDB_DB=hape
     ports:
       - 8086:8086
     volumes:
-      - ./influxdb-1:/var/lib/influxdb2
+      - influxData1v:/var/lib/influxdb2:rw,z
+      - influxData1c:/etc/influxdb:rw,z
     env_file:
       - .env
-    networks: 
+    networks:
       - SUES_net
-  influxdb-2:
-    image: influxdb:2.7.1
-    container_name: SUES_influxdb2
-    environment:
-      - INFLUXDB_HTTP_BIND_ADDRESS=:8087
-      - INFLUXDB_DB=HAPE
-      - INFLUX_TOKEN=$INFLUX_TOKEN1
-    ports:
-      - 8087:8087
-    volumes:
-      - ./influxdb-2:/var/lib/influxdb2
-    env_file:
-      - .env
-    networks: 
-      - SUES_net
-  telegraf:
-    build: ./telegraf
+  telegraf-1:
+    build: ./telegraf-1
     image: localbuild/telegraf:1.26.3
     depends_on:
       - influxdb-1
-      - influxdb-2
-    container_name: SUES_telegraf
-    links:
-      - influxdb-1
-      - influxdb-2
-    #restart: unless-stopped
+    container_name: SUES_telegraf1
+    restart: unless-stopped
     #environment:
     volumes:
-      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+      - ./telegraf-1/telegraf.conf:/etc/telegraf/telegraf.conf
       #- /var/run/docker.sock:/var/run/docker.sock"
     env_file:
       - .env
@@ -108,6 +95,7 @@ networks:
 volumes:
   noderedData:
   grafanaData:
-  influxData:
+  influxData1v:
+  influxData1c:
   mosquittoLog:
   mosquittoData:
