@@ -2,7 +2,7 @@ version: "3"
 services:
   influxdb-1:
     build: ./influx
-    image: localbuild/influxdb:2.7.1
+    image: localbuild/influxdb:2.7.4
     container_name: SUES_influxdb2
     restart: unless-stopped
     environment:
